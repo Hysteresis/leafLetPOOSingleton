@@ -15,6 +15,7 @@
     crossorigin=""></script>
     <script defer src="script.js"></script>
     <link rel="stylesheet" href="newstyle.css">
+    
 
 
 </head>
@@ -48,10 +49,10 @@ echo "<table id='table' style=\"display: none\">";
 
 echo "</table>";
 
-
+require('formulaire.php');
 ?>
 
-<!-- L'utilisateur saisit latitude et longitude puis inserer un marker dans la map -->
+<!-- L'utilisateur saisit la latitude et la longitude puis inserer un marker dans la map -->
 
 
 <!-- html -->
@@ -71,6 +72,9 @@ echo "</table>";
             var ville = this.getElementsByClassName("ville")[0].innerHTML;
             var description = this.getElementsByClassName("description")[0].innerHTML;
             var marker = L.marker([Number(lat), Number(long)]).addTo(map);
+            marker.bindPopup(`${ville} </br> ${description}`).openPopup();
+
+
         });
   });
 </script>
