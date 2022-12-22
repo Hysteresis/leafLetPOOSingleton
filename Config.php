@@ -21,7 +21,7 @@ class Config{
     
     }
 
-
+    // si le singleton n'est pas créé -> le créé et return si il est deja créé
     public static function getInstance(){
         if(is_null(self::$_instance)){
             self::$_instance = new Config();
@@ -32,14 +32,27 @@ class Config{
     //! requete SQL 
 
     public function getLesAdresses(){
+        // ce tableau sera envoyé coté HTML
+        // $lesAdresses = array();
+        //Récupère la requete SQL 
         $stmt = $this->pdo->prepare("SELECT * FROM map");
         $stmt->execute();
         $results = $stmt->fetchAll();
-        // var_dump lisible
         
-    echo "<pre>";
-    print_r($results);
-    echo "</pre>";
+        foreach ($results as $result) {
+            // echo "<pre>";
+            // print_r($result);
+            // echo "</pre>";
+            $id = $result['Id'];
+            $ville = $result['ville'];
+            $description = $result['description'];
+            $longitude = $result['longitude'];
+            $latitude = $result['latitude'];
+            // $adress = new Adress($id, $ville, $description, $longitude, $latitude);
+            // array_push($lesAdresses, $adress );
+
+        } return $results ;
+
     }
 
 
